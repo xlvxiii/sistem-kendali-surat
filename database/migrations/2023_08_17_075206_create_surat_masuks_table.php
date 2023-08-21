@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('perihal');
             $table->string('asal_surat');
             $table->string('nomor_agenda');
+            $table->string('file');
+            $table->foreignId('jenis_disposisi_id');
+            $table->string('kabag_tujuan');
+            $table->string('staff_tujuan');
+            $table->timestamp('tgl_diposisi_pimpinan');
+            $table->timestamp('tgl_diposisi_kabag');
             $table->timestamps();
         });
     }

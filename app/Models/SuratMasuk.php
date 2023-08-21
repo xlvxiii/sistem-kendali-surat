@@ -9,8 +9,8 @@ class SuratMasuk extends Model
 {
     use HasFactory;
 
-    public function disposisi()
+    public function JenisDisposisi()
     {
-        return $this->hasOne(Disposisi::class);
+        return $this->belongsTo(JenisDisposisi::class);
     }
 }
