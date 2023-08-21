@@ -43,11 +43,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'delete user']);
 
         //buat role
-        $admin = Role::create(['name' => 'Admin']);
-        $unitPengolah = Role::create(['name' => 'Unit Pengolah']);
-        $pimpinan = Role::create(['name' => 'Pimpinan']);
-        $kabag = Role::create(['name' => 'Kepala Bagian']);
-        $staff = Role::create(['name' => 'Staff']);
+        $admin = Role::create(['name' => 'admin']);
+        $unitPengolah = Role::create(['name' => 'unit pengolah']);
+        $pimpinan = Role::create(['name' => 'pimpinan']);
+        $kabag = Role::create(['name' => 'kepala bagian']);
+        $staff = Role::create(['name' => 'staff']);
 
         //memberikan permission ke role
         $admin->givePermissionTo([
