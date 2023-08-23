@@ -16,6 +16,9 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         //
+        // reset cache roles dan permission
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
         //buat permission
         Permission::create(['name' => 'create surat masuk']);
         Permission::create(['name' => 'read surat masuk']);
