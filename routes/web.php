@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SuratMasukController;
 use Illuminate\Support\Facades\{Route, Auth};
 
 /*
@@ -27,3 +28,5 @@ Route::get('/pengolah', [HomeController::class, 'indexPengolah'])->middleware('r
 Route::get('/pimpinan', [HomeController::class, 'indexPimpinan'])->middleware('role:pimpinan')->name('pimpinan.dashboard');
 Route::get('/kabag', [HomeController::class, 'indexKabag'])->middleware('role:kepala bagian')->name('kabag.dashboard');
 Route::get('/staff', [HomeController::class, 'indexStaff'])->middleware('role:staff')->name('staff.dashboard');
+
+Route::get('/suratMasuk', [SuratMasukController::class, 'index'])->middleware();

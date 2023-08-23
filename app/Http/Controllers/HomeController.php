@@ -51,26 +51,26 @@ class HomeController extends Controller
 
     public function indexAdmin()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard', ['title'=> 'Dashboard']);
     }
 
     public function indexPengolah()
     {
-        return view('pengolah.dashboard');
+        return view('pengolah.dashboard', ['title' => 'Dashboard']);
     }
 
     public function indexPimpinan()
     {
-        return view('pimpinan.dashboard');
+        return view('pimpinan.dashboard', ['title' => 'Dashboard']);
     }
 
     public function indexKabag()
     {
-        return view('kabag.dashboard');
+        return view('kabag.dashboard', ['title' => 'Dashboard']);
     }
 
     public function indexStaff()
     {
-        return view('staff.dashboard');
+        return view('staff.dashboard', ['title' => 'Dashboard']);
     }
 }

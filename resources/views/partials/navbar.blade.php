@@ -17,8 +17,8 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="index.html">
+        <li class="nav-item {{ ($title == 'Dashboard') ? 'active' : '' }}">
+            <a class="nav-link" href="/home">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -28,22 +28,20 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Interface
+            Menu
         </div>
 
-        <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
-        </li>
-
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
-        </li>
+        @if (Auth::user()->hasRole('admin'))
+            @include('partials.nav-item.admin')
+        @elseif (Auth::user()->hasRole('unit pengolah'))
+            @include('partials.nav-item.pengolah')
+        @elseif (Auth::user()->hasRole('pimpinan'))
+            @include('partials.nav-item.pimpinan')
+        @elseif (Auth::user()->hasRole('kepala bagian'))
+            @include('partials.nav-item.kabag')
+        @elseif (Auth::user()->hasRole('staff'))
+            @include('partials.nav-item.staff')
+        @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
