@@ -32,15 +32,19 @@
         </div>
 
         @if (Auth::user()->hasRole('admin'))
-            @include('partials.nav-item.admin')
+            @include('partials.nav-item.surat-masuk')
+            @include('partials.nav-item.surat-keluar')
+            @include('partials.nav-item.user')
         @elseif (Auth::user()->hasRole('unit pengolah'))
-            @include('partials.nav-item.pengolah')
+            @include('partials.nav-item.surat-masuk')
+            @include('partials.nav-item.surat-keluar')
         @elseif (Auth::user()->hasRole('pimpinan'))
-            @include('partials.nav-item.pimpinan')
+            @include('partials.nav-item.surat-masuk')
+            @include('partials.nav-item.surat-keluar')
         @elseif (Auth::user()->hasRole('kepala bagian'))
-            @include('partials.nav-item.kabag')
+            @include('partials.nav-item.surat-masuk')
         @elseif (Auth::user()->hasRole('staff'))
-            @include('partials.nav-item.staff')
+            @include('partials.nav-item.surat-masuk')
         @endif
 
         <!-- Divider -->

@@ -12,7 +12,8 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        //
+        //halaman surat masuk
+        return view('surat-masuk', ['title' => 'Surat Masuk']);
     }
 
     /**
