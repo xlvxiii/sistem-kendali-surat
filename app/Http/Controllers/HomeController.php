@@ -30,19 +30,19 @@ class HomeController extends Controller
         {
             return redirect()->route('admin.dashboard');
         }
-        else if ($user->hasRole('unit pengolah'))
+        elseif ($user->hasRole('unit pengolah'))
         {
             return redirect()->route('pengolah.dashboard');
         }
-        else if ($user->hasRole('pimpinan'))
+        elseif ($user->hasRole('pimpinan'))
         {
             return redirect()->route('pimpinan.dashboard');
         }
-        else if ($user->hasRole('kepala bagian'))
+        elseif ($user->hasRole('kepala bagian'))
         {
             return redirect()->route('kabag.dashboard');
         }
-        else if ($user->hasRole('staff'))
+        elseif ($user->hasRole('staff'))
         {
             return redirect()->route('staff.dashboard');
         }

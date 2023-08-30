@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SuratMasukController;
 use Illuminate\Support\Facades\{Route, Auth};
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,4 @@ Route::get('/kabag', [HomeController::class, 'indexKabag'])->middleware('role:ke
 Route::get('/staff', [HomeController::class, 'indexStaff'])->middleware('role:staff')->name('staff.dashboard');
 
 Route::get('/suratMasuk', [SuratMasukController::class, 'index'])->middleware();
+Route::resource('/users', UserController::class)->middleware('role:admin', 'auth');
