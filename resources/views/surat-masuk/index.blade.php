@@ -10,37 +10,42 @@
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header">{{ __('Data User') }}</div>
+                    <div class="card-header">{{ __('Surat Masuk') }}</div>
 
                     <div class="card-body">
-                        <a href="/users/create">
-                            <button class="btn btn-sm btn-success mb-2"><i class="bi bi-file-earmark-plus-fill"></i>Tambah User</button>
+                        <a href="/suratMasuk/create">
+                            <button class="btn btn-sm btn-success mb-2"><i class="bi bi-file-earmark-plus-fill"></i>Tambah Surat</button>
                         </a>
-                        <table id="userTable" class="display table table-borderless table-hover table-striped table-sm">
+                        <table id="suratMasukTable" class="display table table-borderless table-hover table-striped table-sm">
                             <caption>Data User</caption>
                             <thead class="">
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
+                                    <th>No. Surat</th>
+                                    <th>Tanggal</th>
+                                    <th>Diterima</th>
+                                    <th>Perihal</th>
+                                    <th>Asal</th>
+                                    <th>No. Agenda</th>
                                     <th>Aksi</th>
-
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($data as $suratMasuk)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ ucwords($user->name) }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ ucwords($user->roles->pluck('name')->implode(',')) }}</td>
+                                        <td>{{ $suratMasuk->nomor_surat }}</td>
+                                        <td>{{ $suratMasuk->tanggal_surat }}</td>
+                                        <td>{{ $suratMasuk->tanggal_diterima }}</td>
+                                        <td>{{ $suratMasuk->perihal }}</td>
+                                        <td>{{ $suratMasuk->asal_surat }}</td>
+                                        <td>{{ $suratMasuk->nomor_agenda }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-success"><span class="bi bi-eye-fill"></span></button>
-                                            <a href="/users/{{ $user->id }}/edit" class="btn btn-sm btn-warning" title="Edit">
+                                            <a href="/suratMasuk/{{ $suratMasuk->id }}/edit" class="btn btn-sm btn-warning" title="Edit">
                                                 <span class="bi bi-pencil-fill"></span>
                                             </a>
-                                            <form action="/users/{{ $user->id }}" method="post" class="d-inline">
+                                            <form action="/suratMasuk/{{ $suratMasuk->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Anda yakin ingin menghapus data?')">
@@ -52,16 +57,14 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script type="module">
         $(document).ready(function() {
-            $('#userTable').DataTable();
+            $('#suratMasukTable').DataTable();
         });
     </script>
 @endsection

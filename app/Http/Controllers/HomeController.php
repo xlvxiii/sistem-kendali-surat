@@ -26,24 +26,15 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if($user->hasRole('admin'))
-        {
+        if ($user->hasRole('admin')) {
             return redirect()->route('admin.dashboard');
-        }
-        elseif ($user->hasRole('unit pengolah'))
-        {
+        } elseif ($user->hasRole('unit pengolah')) {
             return redirect()->route('pengolah.dashboard');
-        }
-        elseif ($user->hasRole('pimpinan'))
-        {
+        } elseif ($user->hasRole('pimpinan')) {
             return redirect()->route('pimpinan.dashboard');
-        }
-        elseif ($user->hasRole('kepala bagian'))
-        {
+        } elseif ($user->hasRole('kepala bagian')) {
             return redirect()->route('kabag.dashboard');
-        }
-        elseif ($user->hasRole('staff'))
-        {
+        } elseif ($user->hasRole('staff')) {
             return redirect()->route('staff.dashboard');
         }
         return view('home');
@@ -51,7 +42,7 @@ class HomeController extends Controller
 
     public function indexAdmin()
     {
-        return view('admin.dashboard', ['title'=> 'Dashboard']);
+        return view('admin.dashboard', ['title' => 'Dashboard']);
     }
 
     public function indexPengolah()

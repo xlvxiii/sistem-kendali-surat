@@ -25,10 +25,10 @@
                                     <label for="role" class="form-label">Role</label>
                                     <select class="form-select" id="role" name="role">
                                         @foreach ($roles as $role)
-                                            @if (old('role') == $role->id)
-                                                <option value="{{ $role->id }}" selected>{{ ucwords($role->name) }}</option>
+                                            @if (old('role') == $role->name)
+                                                <option value="{{ $role->name }}" selected>{{ ucwords($role->name) }}</option>
                                             @else
-                                                <option value="{{ $role->id }}">{{ ucwords($role->name) }}</option>
+                                                <option value="{{ $role->name }}">{{ ucwords($role->name) }}</option>
                                             @endif
                                         @endforeach
                                     </select>

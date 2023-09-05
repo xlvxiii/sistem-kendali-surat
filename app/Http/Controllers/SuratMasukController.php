@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
+use App\Models\JenisDisposisi;
 
 class SuratMasukController extends Controller
 {
@@ -13,7 +14,8 @@ class SuratMasukController extends Controller
     public function index()
     {
         //halaman surat masuk
-        return view('surat-masuk', ['title' => 'Surat Masuk']);
+        $data = SuratMasuk::all();
+        return view('surat-masuk.index', ['title' => 'Surat Masuk', 'data' => $data]);
     }
 
     /**
@@ -22,6 +24,8 @@ class SuratMasukController extends Controller
     public function create()
     {
         //
+        $disposisi = JenisDisposisi::all();
+        return view('surat-masuk.create', ['title' => 'Tambah Surat', 'disposisi' => $disposisi]);
     }
 
     /**

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('staff_tujuan');
             $table->timestamp('tgl_diposisi_pimpinan');
             $table->timestamp('tgl_diposisi_kabag');
+            $table->text('catatan');
             $table->timestamps();
         });
     }

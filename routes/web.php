@@ -30,5 +30,6 @@ Route::get('/pimpinan', [HomeController::class, 'indexPimpinan'])->middleware('r
 Route::get('/kabag', [HomeController::class, 'indexKabag'])->middleware('role:kepala bagian')->name('kabag.dashboard');
 Route::get('/staff', [HomeController::class, 'indexStaff'])->middleware('role:staff')->name('staff.dashboard');
 
-Route::get('/suratMasuk', [SuratMasukController::class, 'index'])->middleware();
-Route::resource('/users', UserController::class)->middleware('role:admin', 'auth');
+Route::get('/suratKeluar', [SuratKeluarController::class, 'index'])->middleware(['auth', 'role:admin|unit pengolah']);
+Route::resource('/suratMasuk', SuratMasukController::class)->middleware('auth');
+Route::resource('/users', UserController::class)->middleware(['auth', 'role:admin']);
