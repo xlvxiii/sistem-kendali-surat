@@ -94,7 +94,7 @@
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#passwordCollapse" aria-expanded="false" aria-controls="passwordCollapse">
                                     Change Password
                                 </button>
-                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>
 

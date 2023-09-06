@@ -26,6 +26,6 @@ class JenisDisposisiSeeder extends Seeder
         JenisDisposisi::create(['jenis_disposisi' => 'edarkan']);
         JenisDisposisi::create(['jenis_disposisi' => 'simpan']);
         JenisDisposisi::create(['jenis_disposisi' => 'monitor']);
-        JenisDisposisi::create(['jenis_disposisi' => 'hadiri/wakili']);
+        JenisDisposisi::create(['jenis_disposisi' => 'hadiri / wakili']);
     }
 }

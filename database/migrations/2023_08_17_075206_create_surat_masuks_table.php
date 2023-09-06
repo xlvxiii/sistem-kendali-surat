@@ -18,14 +18,14 @@ return new class extends Migration
             $table->date('tanggal_diterima');
             $table->string('perihal');
             $table->string('asal_surat');
-            $table->string('nomor_agenda');
+            $table->string('nomor_agenda')->nullable();
             $table->string('file');
-            $table->foreignId('jenis_disposisi_id');
-            $table->string('kabag_tujuan');
-            $table->string('staff_tujuan');
-            $table->timestamp('tgl_diposisi_pimpinan');
-            $table->timestamp('tgl_diposisi_kabag');
-            $table->text('catatan');
+            $table->foreignId('jenis_disposisi_id')->nullable();
+            $table->string('kabag_tujuan')->nullable();
+            $table->string('staff_tujuan')->nullable();
+            $table->timestamp('tgl_diposisi_pimpinan')->nullable();
+            $table->timestamp('tgl_diposisi_kabag')->nullable();
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }
