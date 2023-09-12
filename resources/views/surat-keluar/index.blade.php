@@ -1,22 +1,41 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
+    <div id="main">
+        {{-- page heading --}}
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>{{ __($title) }}</h3>
+                        <p class="text-subtitle text-muted">{{ __('You are logged in as admin!') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end of page heading --}}
+
+        {{-- page content --}}
+        <div class="page-content">
+            <div class="section">
                 @if (session()->has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
                     </div>
                 @endif
+                
+                {{-- card --}}
                 <div class="card">
-                    <div class="card-header">{{ __('Surat Keluar') }}</div>
+                    <div class="card-header">
+                        <h4 class="card-title">{{ __('Surat Keluar') }}</h4>
+                    </div>
 
+                    {{-- card body --}}
                     <div class="card-body">
                         <a href="/suratKeluar/create">
                             <button class="btn btn-sm btn-success mb-2"><i class="bi bi-file-earmark-plus-fill"></i>Tambah Surat</button>
                         </a>
-                        <table id="suratKeluarTable" class="display table table-borderless table-hover table-striped table-sm fs-6">
+                        <table id="suratKeluarTable" class="display table table-borderless table-hover table-striped fs-6">
                             <caption>Data Surat Keluar</caption>
                             <thead class="">
                                 <tr>
@@ -24,7 +43,7 @@
                                     <th>No. Surat</th>
                                     <th>Tanggal Surat</th>
                                     <th>Tanggal Kirim</th>
-                                    <th>Perihal</th>
+                                    {{-- <th>Perihal</th> --}}
                                     <th>Tujuan</th>
                                     <th>Asal</th>
                                     <th>Aksi</th>
@@ -37,7 +56,7 @@
                                         <td>{{ $suratKeluar->nomor_surat }}</td>
                                         <td>{{ $suratKeluar->tanggal_surat }}</td>
                                         <td>{{ $suratKeluar->tanggal_kirim }}</td>
-                                        <td>{{ $suratKeluar->perihal }}</td>
+                                        {{-- <td>{{ $suratKeluar->perihal }}</td> --}}
                                         <td>{{ $suratKeluar->tujuan }}</td>
                                         <td>{{ $suratKeluar->asal_surat }}</td>
                                         <td>
@@ -88,10 +107,15 @@
                             </tbody>
                         </table>
                     </div>
+                    {{-- end of card body --}}
                 </div>
+                {{-- end of card --}}
             </div>
         </div>
+        {{-- end of page content --}}
+
     </div>
+    
     <script type="module">
         $(document).ready(function() {
             $('#suratKeluarTable').DataTable();

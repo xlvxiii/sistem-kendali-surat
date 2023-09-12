@@ -30,8 +30,13 @@
     <link rel="stylesheet" href="{{ asset('mazer/css/main/app-dark.css') }}">
     <link rel="shortcut icon" href="{{ asset('mazer/images/logo/favicon.svg') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('mazer/images/logo/favicon.png') }}" type="image/png">
-    
+
     <link rel="stylesheet" href="{{ asset('mazer/css/shared/iconly.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('mazer/extensions/sweetalert2/sweetalert2.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('mazer/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/css/pages/simple-datatables.css') }}">
     {{-- end of mazer --}}
 
 </head>
@@ -41,8 +46,7 @@
 
 
         <main class="">
-            {{-- @include('partials.navbar') --}}
-            @include('partials.navbarmazer')
+            @include('partials.navbar')
             @yield('content')
         </main>
     </div>
@@ -62,9 +66,12 @@
     <script src="{{ asset('mazer/js/bootstrap.js') }}"></script>
     <script src="{{ asset('mazer/js/app.js') }}"></script>
 
-    <!-- Need: Apexcharts -->
-    <script src="{{ asset('mazer/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('mazser/js/pages/dashboard.js') }}"></script>
+
+    <script src="{{ asset('mazer/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('mazer/js/pages/sweetalert2.js') }}"></script>
+
+    <script src="{{ asset('mazer/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('mazer/js/pages/simple-datatables.js') }}"></script>
     {{-- end of mazer --}}
 
 </body>

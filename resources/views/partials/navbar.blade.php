@@ -1,166 +1,78 @@
-<!-- sb2admin -->
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">Jamkrindo</div>
-        </a>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item {{ $title == 'Dashboard' ? 'active' : '' }}">
-            <a class="nav-link" href="/home">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Menu
-        </div>
-
-        @if (Auth::user()->hasRole('admin'))
-            @include('partials.nav-item.surat-masuk')
-            @include('partials.nav-item.surat-keluar')
-            @include('partials.nav-item.user')
-        @elseif (Auth::user()->hasRole('unit pengolah'))
-            @include('partials.nav-item.surat-masuk')
-            @include('partials.nav-item.surat-keluar')
-        @elseif (Auth::user()->hasRole('pimpinan'))
-            @include('partials.nav-item.surat-masuk')
-            @include('partials.nav-item.surat-keluar')
-        @elseif (Auth::user()->hasRole('kepala bagian'))
-            @include('partials.nav-item.surat-masuk')
-        @elseif (Auth::user()->hasRole('staff'))
-            @include('partials.nav-item.surat-masuk')
-        @endif
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
-
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ ucwords(Auth::user()->name) }}</span>
-                            <img class="img-profile rounded-circle" src="{{ asset('sb2admin/img/undraw_profile.svg') }}" alt="Profile">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                @yield('content')
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+<div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header position-relative">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <a href="/home"><img src="{{ asset('mazer/images/logo/logo.svg') }}" alt="Logo" srcset="" /></a>
+                </div>
+                <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                        <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                opacity=".3"></path>
+                            <g transform="translate(-210 -1)">
+                                <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                <circle cx="220.5" cy="11.5" r="4"></circle>
+                                <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                    <div class="form-check form-switch fs-6">
+                        <input class="form-check-input me-0" type="checkbox" id="toggle-dark" />
+                        <label class="form-check-label"></label>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="sidebar-toggler x">
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x forbi-middle"></i></a>
                 </div>
             </div>
-        </footer>
-        <!-- End of Footer -->
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
 
-    </div>
-    <!-- End of Content Wrapper -->
+                <li class="sidebar-item {{ Request::is('admin*') ? 'active' : '' }}">
+                    <a href="/home" class="sidebar-link">
+                        <i class="bi bi-speedometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
-</div>
-<!-- End of Page Wrapper -->
+                <li class="sidebar-item {{ Request::is('suratMasuk*') ? 'active' : '' }}">
+                    <a href="/suratMasuk" class="sidebar-link">
+                        <i class="fas fa-mail-bulk"></i>
+                        <span>Surat Masuk</span>
+                    </a>
+                </li>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+                <li class="sidebar-item {{ Request::is('suratKeluar*') ? 'active' : '' }}">
+                    <a href="/suratKeluar" class="sidebar-link">
+                        <i class="fas fa-mail-bulk"></i>
+                        <span>Surat Keluar</span>
+                    </a>
+                </li>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
+                <li class="sidebar-item">
+                    <button class="sidebar-link btn btn-block" id="question">
+                        <i class="fas fa-sign-out-alt" style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"></i>
+                        <span>Logout</span>
+                    </button>
+                </li>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
-            </div>
+
+            </ul>
         </div>
     </div>
 </div>
-<!-- end of sb2admin -->
