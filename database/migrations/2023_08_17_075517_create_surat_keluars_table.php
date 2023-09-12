@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('perihal');
             $table->string('tujuan');
             $table->string('asal_surat');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

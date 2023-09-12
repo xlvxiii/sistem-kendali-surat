@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\SuratMasuk;
 
 class HomeController extends Controller
 {
@@ -42,7 +43,8 @@ class HomeController extends Controller
 
     public function indexAdmin()
     {
-        return view('admin.dashboard', ['title' => 'Dashboard']);
+        $count = SuratMasuk::all()->count();
+        return view('admin.dashboard', ['title' => 'Dashboard', 'count' => $count]);
     }
 
     public function indexPengolah()

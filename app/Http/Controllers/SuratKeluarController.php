@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SuratKeluarController extends Controller
 {
@@ -13,7 +14,8 @@ class SuratKeluarController extends Controller
     public function index()
     {
         //
-        return view('surat-keluar.index');
+        $data = SuratKeluar::all();
+        return view('surat-keluar.index', ['title' => 'Surat Keluar', 'data' => $data]);
     }
 
     /**
@@ -22,6 +24,7 @@ class SuratKeluarController extends Controller
     public function create()
     {
         //
+        return view('surat-keluar.create', ['title' => 'Tambah Surat']);
     }
 
     /**
@@ -30,6 +33,23 @@ class SuratKeluarController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'nomor_surat' => 'required',
+            'tanggal_surat' => 'required|date',
+            'tanggal_kirim' => 'required|date',
+            'perihal' => 'required',
+            'tujuan' => 'required',
+            'asal_surat' => 'required',
+            'file' => 'file',
+        ]);
+
+        if ($request->file('file')) {
+            $validatedData['file'] = $request->file('file')->store('file-surat');
+        }
+
+        SuratKeluar::create($validatedData);
+
+        return redirect('/suratKeluar')->with('success', 'New data has been added!');
     }
 
     /**
@@ -38,6 +58,7 @@ class SuratKeluarController extends Controller
     public function show(SuratKeluar $suratKeluar)
     {
         //
+        return view('surat-keluar.show', ['title' => 'Detail', 'data' => $suratKeluar]);
     }
 
     /**
@@ -62,5 +83,10 @@ class SuratKeluarController extends Controller
     public function destroy(SuratKeluar $suratKeluar)
     {
         //
+        if ($suratKeluar->file) {
+            Storage::delete($suratKeluar->file);
+        }
+        SuratKeluar::destroy($suratKeluar->id);
+        return redirect('/suratKeluar')->with('success', 'Data has been deleted!');
     }
 }

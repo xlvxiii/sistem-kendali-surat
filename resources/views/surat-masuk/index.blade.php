@@ -17,7 +17,7 @@
                             <button class="btn btn-sm btn-success mb-2"><i class="bi bi-file-earmark-plus-fill"></i>Tambah Surat</button>
                         </a>
                         <table id="suratMasukTable" class="display table table-borderless table-hover table-striped table-sm fs-6">
-                            <caption>Data User</caption>
+                            <caption>Data Surat Masuk</caption>
                             <thead class="">
                                 <tr>
                                     <th>No</th>

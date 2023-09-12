@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class SuratKeluar extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nomor_surat',
+        'tanggal_surat',
+        'tanggal_kirim',
+        'perihal',
+        'tujuan',
+        'asal_surat',
+        'file',
+    ];
 }

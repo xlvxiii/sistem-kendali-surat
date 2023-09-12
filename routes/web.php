@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SuratMasukController;
-use Illuminate\Support\Facades\{Route, Auth};
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\{Route, Auth};
+use App\Http\Controllers\SuratMasukController;
+use App\Http\Controllers\SuratKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,4 @@ Route::get('/staff', [HomeController::class, 'indexStaff'])->middleware('role:st
 
 Route::resource('/users', UserController::class)->middleware(['auth', 'role:admin']);
 Route::resource('/suratMasuk', SuratMasukController::class)->middleware('auth');
-Route::resource('/suratKeluar', SuratKeluarController::class)->middleware(['auth']);
+Route::resource('/suratKeluar', SuratKeluarController::class)->middleware('auth');
