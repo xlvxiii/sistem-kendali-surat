@@ -25,6 +25,15 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('sb2admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    {{-- Mazer template --}}
+    <link rel="stylesheet" href="{{ asset('mazer/css/main/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/css/main/app-dark.css') }}">
+    <link rel="shortcut icon" href="{{ asset('mazer/images/logo/favicon.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('mazer/images/logo/favicon.png') }}" type="image/png">
+    
+    <link rel="stylesheet" href="{{ asset('mazer/css/shared/iconly.css') }}">
+    {{-- end of mazer --}}
+
 </head>
 
 <body>
@@ -32,7 +41,9 @@
 
 
         <main class="">
-            @include('partials.navbar')
+            {{-- @include('partials.navbar') --}}
+            @include('partials.navbarmazer')
+            @yield('content')
         </main>
     </div>
 
@@ -46,6 +57,15 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sb2admin/js/sb-admin-2.min.js') }}"></script>
+
+    {{-- mazer --}}
+    <script src="{{ asset('mazer/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('mazer/js/app.js') }}"></script>
+
+    <!-- Need: Apexcharts -->
+    <script src="{{ asset('mazer/extensions/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('mazser/js/pages/dashboard.js') }}"></script>
+    {{-- end of mazer --}}
 
 </body>
 
