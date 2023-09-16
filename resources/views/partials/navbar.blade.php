@@ -1,9 +1,10 @@
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="logo">
-                    <a href="/home"><img src="{{ asset('mazer/compiled/svg/logo.svg') }}" alt="Logo" srcset="" /></a>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="logo col-5 d-flex justify-content-start">
+                    {{-- <a href="/home"><img src="{{ asset('mazer/compiled/svg/logo.svg') }}" alt="Logo" srcset="" /></a> --}}
+                    <a href="/home"><img src="{{ asset('img/jamkrindo_svg.svg') }}" alt="Logo" srcset="" style="scale: 300%;"/></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20"
@@ -21,7 +22,7 @@
                         </g>
                     </svg>
                     <div class="form-check form-switch fs-6">
-                        <input class="form-check-input me-0" type="checkbox" id="toggle-dark" style="cursor: pointer" title="Change theme"/>
+                        <input class="form-check-input me-0" type="checkbox" id="toggle-dark" style="cursor: pointer" title="Change theme" />
                         <label class="form-check-label"></label>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
@@ -60,7 +61,7 @@
                         <span>Surat Keluar</span>
                     </a>
                 </li>
-                
+
                 <li class="sidebar-item {{ Request::is('users*') ? 'active' : '' }}">
                     <a href="/users" class="sidebar-link">
                         <i class="fas fa-user"></i>

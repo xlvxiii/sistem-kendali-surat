@@ -15,7 +15,7 @@
 
         {{-- page content --}}
         <div class="page-content">
-            <a href="{{ url()->previous() }}" class="btn btn-primary mb-3">
+            <a href="{{ url('users') }}" class="btn btn-primary mb-3">
                 <i class="fas fa-chevron-left"></i> Kembali
             </a>
             <section class="row">

@@ -16,7 +16,7 @@
         {{-- page content --}}
         <div class="page-content">
             <section>
-                <a href="{{ url()->previous() }}" class="btn btn-primary mb-3">
+                <a href="{{ url('users') }}" class="btn btn-primary mb-3">
                     <i class="fas fa-chevron-left"></i> Kembali
                 </a>
                 <div class="row match-height">

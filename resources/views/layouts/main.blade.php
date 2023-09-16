@@ -28,7 +28,7 @@
     {{-- Mazer template --}}
     <link
       rel="shortcut icon"
-      href="{{ asset('mazer/compiled/svg/favicon.svg') }}"
+      href="{{ asset('img/jamkrindo_svg.svg') }}"
       type="image/x-icon"
     />
     <link
@@ -56,8 +56,10 @@
 
     <link
       rel="stylesheet"
-      href="assets/extensions/@fortawesome/fontawesome-free/css/all.min.css"
+      href="{{ asset('mazer/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}"
     />
+
+    <link rel="stylesheet" href="{{ asset('mazer/extensions/filepond/filepond.css') }}" />
     {{-- end of mazer --}}
 
 </head>
@@ -94,6 +96,10 @@
 
     <script src="{{ asset('mazer/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
     <script src="{{ asset('mazer/static/js/pages/form-element-select.js') }}"></script>
+
+    {{-- <script src="{{ asset('mazer/extensions/filepond/filepond.js') }}"></script>
+    <script src="{{ asset('mazer/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js') }}"></script> --}}
+    <script src="{{ asset('mazer/static/js/pages/filepond.js') }}"></script>
     {{-- end of mazer --}}
 
 </body>

@@ -42,6 +42,7 @@ namespace App\Models{
  * @property string $perihal
  * @property string $tujuan
  * @property string $asal_surat
+ * @property string $file
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar newModelQuery()
@@ -49,6 +50,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar query()
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar whereAsalSurat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar whereFile($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar whereNomorSurat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar wherePerihal($value)
@@ -102,6 +104,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereUpdatedAt($value)
  */
 	class SuratMasuk extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TemporaryFile
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryFile query()
+ */
+	class TemporaryFile extends \Eloquent {}
 }
 
 namespace App\Models{

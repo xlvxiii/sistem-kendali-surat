@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SuratKeluar;
+use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,11 +41,11 @@ class SuratKeluarController extends Controller
             'perihal' => 'required',
             'tujuan' => 'required',
             'asal_surat' => 'required',
-            'file' => 'file',
+            'file' => 'file|required',
         ]);
 
         if ($request->file('file')) {
-            $validatedData['file'] = $request->file('file')->store('file-surat');
+            $validatedData['file'] = $request->file('file')->store('file-surat-keluar');
         }
 
         SuratKeluar::create($validatedData);
