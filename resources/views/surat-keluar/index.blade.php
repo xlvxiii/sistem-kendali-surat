@@ -2,6 +2,11 @@
 
 @section('content')
     <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
         {{-- page heading --}}
         <div class="page-heading">
             <div class="page-title">
@@ -17,7 +22,7 @@
 
         {{-- page content --}}
         <div class="page-content">
-            <div class="section">
+            <section class="row">
                 @if (session()->has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
@@ -35,7 +40,7 @@
                         <a href="/suratKeluar/create">
                             <button class="btn btn-sm btn-success mb-2"><i class="bi bi-file-earmark-plus-fill"></i>Tambah Surat</button>
                         </a>
-                        <table id="suratKeluarTable" class="display table table-borderless table-hover table-striped fs-6">
+                        <table id="suratKeluarTable" class="display table table-borderless table-hover table-striped table-responsive fs-6">
                             <caption>Data Surat Keluar</caption>
                             <thead class="">
                                 <tr>
@@ -65,7 +70,7 @@
                                                     <span class="bi bi-eye-fill"></span>
                                                 </button>
 
-                                                <a href="/suratKeluar/{{ $suratKeluar->id }}/edit" class="btn btn-sm btn-warning mx-1" title="Edit">
+                                                <a href="/suratKeluar/{{ $suratKeluar->id }}/edit" class="badge bg-warning text-bg-dark mx-1" title="Edit">
                                                     <span class="bi bi-pencil-fill"></span>
                                                 </a>
                                                 <form action="/suratKeluar/{{ $suratKeluar->id }}" method="post" class="d-inline">
@@ -110,7 +115,7 @@
                     {{-- end of card body --}}
                 </div>
                 {{-- end of card --}}
-            </div>
+            </section>
         </div>
         {{-- end of page content --}}
 

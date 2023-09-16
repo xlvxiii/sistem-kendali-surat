@@ -39,7 +39,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'role' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => [
                 'required', Password::min(8)
                     ->letters()
@@ -87,40 +87,46 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'role' => 'required',
-            'email' => 'required',
-            'password' => [
-                'confirmed', 'nullable', Password::min(8)
-                    ->letters()
-                    ->numbers()
-                    ->mixedCase()
-            ],
-            'password_confirmation' => Rule::requiredIf($request->password != null)
-        ]);
-        
-        if ($request->role != $user->getRoleNames()->first())
-        {
-            $user->syncRoles($request->role);
+        if ($request->formName == "update-form") {
+            $rules = [
+                'name' => 'required',
+                'role' => 'required',
+            ];
+
+            // code block ini dieksekusi jika user mengubah email
+            if ($request->email != $user->email) {
+                $rules['email'] = 'required|unique:users,email';
+            }
+
+            $validatedData = $request->validate($rules);
+
+            // blok kode ini dieksekusi jika user admin mengubah role user lain
+            if ($request->role != $user->getRoleNames()->first()) {
+                $user->syncRoles($request->role);
+            }
+
+            unset($validatedData['role']);
+            User::where('id', $user->id)->update($validatedData);
+
+            return redirect('/users')->with('success', 'User data has been updated!');
+        } elseif ($request->formName == "change-password-form") {
+            $validatedData = $request->validate([
+                'password' => [
+                    'required', 'confirmed', Password::min(8)
+                        ->letters()
+                        ->numbers()
+                        ->mixedCase()
+                ],
+                'password_confirmation' => Rule::requiredIf($request->password != null)
+            ]);
+
+            $newPassword = Hash::make($validatedData['password']);
+            $userToUpdate = User::find($user->id);
+            $userToUpdate->password = $newPassword;
+            if ($userToUpdate->save()) {
+                return redirect('/users')->with('success', 'User password has been updated!');
+            }
         }
-
-        unset($validatedData['role']);
-        
-        if ($request->filled('password'))
-        {
-            $validatedData['password'] = Hash::make($validatedData['password']);
-        } else {
-            unset($validatedData['password']);
-            unset($validatedData['password_confirmation']);
-        }
-
-        unset($validatedData['password_confirmation']);
-
-        User::where('id', $user->id)->update($validatedData);
-        
-        return redirect('/users')->with('success', 'User has been updated!');
-
     }
 
     /**
@@ -130,6 +136,6 @@ class UserController extends Controller
     {
         //
         User::destroy($user->id);
-        return redirect('/users')->with('success', 'Data berhasil dihapus!');
+        return redirect('/users')->with('success', 'User has been deleted!');
     }
 }

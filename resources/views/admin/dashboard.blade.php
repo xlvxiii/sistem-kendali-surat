@@ -19,7 +19,7 @@
         </div>
 
         <div class="page-content">
-            <section class="section">
+            <section class="row">
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}

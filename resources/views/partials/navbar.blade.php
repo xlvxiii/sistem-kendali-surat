@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="/home"><img src="{{ asset('mazer/images/logo/logo.svg') }}" alt="Logo" srcset="" /></a>
+                    <a href="/home"><img src="{{ asset('mazer/compiled/svg/logo.svg') }}" alt="Logo" srcset="" /></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20"
@@ -21,7 +21,7 @@
                         </g>
                     </svg>
                     <div class="form-check form-switch fs-6">
-                        <input class="form-check-input me-0" type="checkbox" id="toggle-dark" />
+                        <input class="form-check-input me-0" type="checkbox" id="toggle-dark" style="cursor: pointer" title="Change theme"/>
                         <label class="form-check-label"></label>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
@@ -32,7 +32,7 @@
                     </svg>
                 </div>
                 <div class="sidebar-toggler x">
-                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x forbi-middle"></i></a>
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
@@ -60,17 +60,24 @@
                         <span>Surat Keluar</span>
                     </a>
                 </li>
+                
+                <li class="sidebar-item {{ Request::is('users*') ? 'active' : '' }}">
+                    <a href="/users" class="sidebar-link">
+                        <i class="fas fa-user"></i>
+                        <span>Data User</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item">
-                    <button class="sidebar-link btn btn-block" id="question">
+                    <button class="sidebar-link btn btn-block" id="logout-button">
                         <i class="fas fa-sign-out-alt" style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"></i>
                         <span>Logout</span>
                     </button>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
 
             </ul>
         </div>
