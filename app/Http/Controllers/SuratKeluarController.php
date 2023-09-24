@@ -68,6 +68,7 @@ class SuratKeluarController extends Controller
     public function edit(SuratKeluar $suratKeluar)
     {
         //
+        return view('surat-keluar.edit', ['title' => 'Edit Surat', 'suratKeluar' => $suratKeluar]);
     }
 
     /**
@@ -76,6 +77,26 @@ class SuratKeluarController extends Controller
     public function update(Request $request, SuratKeluar $suratKeluar)
     {
         //
+        $validatedData = $request->validate([
+            'nomor_surat' => 'required',
+            'tanggal_surat' => 'required|date',
+            'tanggal_kirim' => 'required|date',
+            'perihal' => 'required',
+            'tujuan' => 'required',
+            'asal_surat' => 'required',
+            'file' => 'file',
+        ]);
+
+        if ($request->file('file')) {
+            if ($request->oldFile) {
+                Storage::delete($request->oldFile);
+            }
+            $validatedData['file'] = $request->file('file')->store('file-surat-keluar');
+        }
+
+        SuratKeluar::where('id', $suratKeluar->id)->update($validatedData);
+
+        return redirect('/suratKeluar')->with('success', 'Data has been updated!');
     }
 
     /**

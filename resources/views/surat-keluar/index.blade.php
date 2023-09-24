@@ -27,6 +27,13 @@
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
                     </div>
+                    <script>
+                        Swal.fire({
+                            icon: "success",
+                            titleText: "Success!",
+                            text: "{{ session('success') }}",
+                        })
+                    </script>
                 @endif
                 
                 {{-- card --}}
@@ -73,12 +80,28 @@
                                                 <a href="/suratKeluar/{{ $suratKeluar->id }}/edit" class="badge bg-warning text-bg-dark mx-1" title="Edit">
                                                     <span class="bi bi-pencil-fill"></span>
                                                 </a>
-                                                <form action="/suratKeluar/{{ $suratKeluar->id }}" method="post" class="d-inline">
+                                                <form action="/suratKeluar/{{ $suratKeluar->id }}" method="post" id="{{ 'delete-form' . $loop->iteration }}" class="d-inline">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Anda yakin ingin menghapus data?')">
+                                                    <button type="button" class="btn btn-sm btn-danger" title="Delete" id="{{ 'delete-button' . $loop->iteration }}">
                                                         <span class="bi bi-x-circle-fill"></span>
                                                     </button>
+                                                    <script>
+                                                        document.getElementById("{{ 'delete-button' . $loop->iteration }}").addEventListener("click", (e) => {
+                                                            Swal.fire({
+                                                                icon: "question",
+                                                                titleText: "Are you sure?",
+                                                                text: "This will delete this data permanently. You cannot undo this action.",
+                                                                showCancelButton: true,
+                                                                confirmButtonText: 'Delete',
+                                                                focusCancel: true,
+                                                            }).then((result) => {
+                                                                if (result.isConfirmed) {
+                                                                    document.getElementById("{{ 'delete-form' . $loop->iteration }}").submit()
+                                                                }
+                                                            })
+                                                        });
+                                                    </script>
                                                 </form>
                                             </div>
 
@@ -98,7 +121,7 @@
                                                         @if (!in_array(pathinfo(asset('storage/' . $suratKeluar->file), PATHINFO_EXTENSION), ['pdf']))
                                                             <img src="{{ asset('storage/' . $suratKeluar->file) }}" alt="" width="100%" height="">
                                                         @else
-                                                            <iframe src="{{ asset('storage/' . $suratKeluar->file . '#zoom=FitW') }}" height="450" class="embed-responsive embed-responsive-item"></iframe>
+                                                            <iframe title="surat-keluar" src="{{ asset('storage/' . $suratKeluar->file . '#zoom=FitW') }}" height="450" class="embed-responsive embed-responsive-item"></iframe>
                                                         @endif
                                                     </div>
                                                 </div>

@@ -24,9 +24,13 @@
         <div class="page-content">
             <section class="row">
                 @if (session()->has('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('success') }}
-                    </div>
+                    <script>
+                        Swal.fire({
+                            icon: "success",
+                            titleText: "Success!",
+                            text: "{{ session('success') }}",
+                        })
+                    </script>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -68,12 +72,29 @@
                                                 <a href="/suratMasuk/{{ $suratMasuk->id }}/edit" class="badge bg-warning text-bg-dark mx-1" title="Edit">
                                                     <span class="bi bi-pencil-fill"></span>
                                                 </a>
-                                                <form action="/suratMasuk/{{ $suratMasuk->id }}" method="post" class="d-inline">
+                                                <form action="/suratMasuk/{{ $suratMasuk->id }}" method="post" id="{{ 'delete-form' . $loop->iteration }}" class="d-inline">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Anda yakin ingin menghapus data?')">
+                                                    <button type="button" id="{{ 'delete-button' . $loop->iteration }}" class="btn btn-sm btn-danger" title="Delete">
                                                         <span class="bi bi-x-circle-fill"></span>
                                                     </button>
+
+                                                    <script>
+                                                        document.getElementById("{{ 'delete-button' . $loop->iteration }}").addEventListener("click", (e) => {
+                                                            Swal.fire({
+                                                                icon: "question",
+                                                                titleText: "Are you sure?",
+                                                                text: "This will delete this data permanently. You cannot undo this action.",
+                                                                showCancelButton: true,
+                                                                confirmButtonText: 'Delete',
+                                                                focusCancel: true,
+                                                            }).then((result) => {
+                                                                if (result.isConfirmed) {
+                                                                    document.getElementById("{{ 'delete-form' . $loop->iteration }}").submit()
+                                                                }
+                                                            })
+                                                        });
+                                                    </script>
                                                 </form>
                                             </div>
                                         </td>

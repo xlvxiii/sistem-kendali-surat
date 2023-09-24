@@ -15,10 +15,10 @@
 
         {{-- page content --}}
         <div class="page-content">
+            <a href="{{ url('users') }}" class="btn btn-primary mb-3">
+                <i class="fas fa-chevron-left"></i> Kembali
+            </a>
             <section>
-                <a href="{{ url('users') }}" class="btn btn-primary mb-3">
-                    <i class="fas fa-chevron-left"></i> Kembali
-                </a>
                 <div class="row match-height">
                     <div class="col-md-6 col-12">
                         {{-- edit user form --}}
@@ -186,7 +186,7 @@
             Swal.fire({
                 icon: "question",
                 titleText: "Are you sure?",
-                text: "This will update the user data",
+                text: "This will change the user data",
                 showCancelButton: true,
                 confirmButtonText: 'Save',
                 focusCancel: true,

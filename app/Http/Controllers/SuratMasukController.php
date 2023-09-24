@@ -48,7 +48,7 @@ class SuratMasukController extends Controller
         ]);
 
         if ($request->file('file')) {
-            $validatedData['file'] = $request->file('file')->store('file-surat');
+            $validatedData['file'] = $request->file('file')->store('file-surat-masuk');
         }
 
         SuratMasuk::create($validatedData);
@@ -96,7 +96,7 @@ class SuratMasukController extends Controller
             if ($request->oldFile) {
                 Storage::delete($request->oldFile);
             }
-            $validatedData['file'] = $request->file('file')->store('file-surat');
+            $validatedData['file'] = $request->file('file')->store('file-surat-masuk');
         }
 
         SuratMasuk::where('id', $suratMasuk->id)->update($validatedData);
