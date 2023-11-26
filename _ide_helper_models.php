@@ -12,6 +12,39 @@
 
 namespace App\Models{
 /**
+ * App\Models\Disposisi1
+ *
+ * @property-read \App\Models\SuratMasuk|null $SuratMasuk
+ * @method static \Illuminate\Database\Eloquent\Builder|Disposisi1 newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Disposisi1 newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Disposisi1 query()
+ */
+	class Disposisi1 extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Divisi
+ *
+ * @property int $id
+ * @property string $nama
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $User
+ * @property-read int|null $user_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Divisi newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Divisi newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Divisi query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Divisi whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Divisi whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Divisi whereNama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Divisi whereUpdatedAt($value)
+ */
+	class Divisi extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\JenisDisposisi
  *
  * @property int $id
@@ -42,7 +75,7 @@ namespace App\Models{
  * @property string $perihal
  * @property string $tujuan
  * @property string $asal_surat
- * @property string $file
+ * @property string|null $file
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|SuratKeluar newModelQuery()
@@ -74,14 +107,10 @@ namespace App\Models{
  * @property string $asal_surat
  * @property string|null $nomor_agenda
  * @property string $file
- * @property int|null $jenis_disposisi_id
- * @property string|null $kabag_tujuan
- * @property string|null $staff_tujuan
- * @property string|null $tgl_diposisi_pimpinan
- * @property string|null $tgl_diposisi_kabag
  * @property string|null $catatan
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Disposisi1|null $Disposisi1
  * @property-read \App\Models\JenisDisposisi|null $JenisDisposisi
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk newQuery()
@@ -91,30 +120,14 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereFile($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereJenisDisposisiId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereKabagTujuan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereNomorAgenda($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereNomorSurat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk wherePerihal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereStaffTujuan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereTanggalDiterima($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereTanggalSurat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereTglDiposisiKabag($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereTglDiposisiPimpinan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SuratMasuk whereUpdatedAt($value)
  */
 	class SuratMasuk extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\TemporaryFile
- *
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryFile newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryFile newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryFile query()
- */
-	class TemporaryFile extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -123,10 +136,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property int|null $divisi_id
  * @property string $email
  * @property mixed $password
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Divisi|null $Divisi
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
@@ -142,6 +157,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDivisiId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)

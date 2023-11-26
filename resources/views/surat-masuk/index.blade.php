@@ -51,7 +51,6 @@
                                     <th>Perihal</th>
                                     <th>Asal</th>
                                     <th>No. Agenda</th>
-                                    <th>Jenis Disposisi</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -65,10 +64,11 @@
                                         <td>{{ $suratMasuk->perihal }}</td>
                                         <td>{{ $suratMasuk->asal_surat }}</td>
                                         <td>{{ $suratMasuk->nomor_agenda }}</td>
-                                        <td>{{ ucwords($suratMasuk->JenisDisposisi->jenis_disposisi) }}</td>
                                         <td>
                                             <div class="d-inline-flex">
-                                                <button class="btn btn-sm btn-success"><span class="bi bi-eye-fill"></span></button>
+                                                <a href="/suratMasuk/{{ $suratMasuk->id }}" class="badge bg-success text-bg-dark py-2" title="Detail">
+                                                    <span class="bi bi-eye-fill"></span>
+                                                </a>
                                                 <a href="/suratMasuk/{{ $suratMasuk->id }}/edit" class="badge bg-warning text-bg-dark mx-1" title="Edit">
                                                     <span class="bi bi-pencil-fill"></span>
                                                 </a>

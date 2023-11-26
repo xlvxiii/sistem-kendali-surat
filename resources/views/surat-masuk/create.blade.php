@@ -154,7 +154,7 @@
                                                 </div>
 
                                                 {{-- input jenis disposisi --}}
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <label for="jenis_disposisi_id" class="form-label">Jenis Disposisi</label>
                                                     <div class="input-group mb-3">
                                                         <label class="input-group-text" for="jenis_disposisi_id">
@@ -177,7 +177,7 @@
                                                             </div>
                                                         @enderror
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 {{-- input catatan --}}
                                                 <div class="col-md-6 col-12">
@@ -193,7 +193,7 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="col-12 d-flex justify-content-end">
+                                                <div class="col-12 mt-4 d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                                     <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                                 </div>

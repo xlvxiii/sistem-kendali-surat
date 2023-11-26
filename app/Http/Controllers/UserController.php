@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
+use App\Models\Divisi;
 
 class UserController extends Controller
 {
@@ -27,7 +28,8 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('users.create', ['title' => 'Tambah User', 'roles' => Role::all()->sortBy('name')]);
+        $divisi = Divisi::all();
+        return view('users.create', ['title' => 'Tambah User', 'roles' => Role::all()->sortBy('name'), 'divisis' => $divisi]);
     }
 
     /**
@@ -35,10 +37,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validatedData = $request->validate([
             'name' => 'required',
             'role' => 'required',
+            'divisi_id' => 'nullable',
             'email' => 'required|unique:users,email',
             'password' => [
                 'required', Password::min(8)
@@ -50,13 +52,11 @@ class UserController extends Controller
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-        //$role = Role::where('name', $validatedData['role'])->first();
         $role = $validatedData['role'];
 
         unset($validatedData['role']);
         $newUser = User::create($validatedData);
 
-        //$newUser->assignRole($role->name);
         $newUser->assignRole($role);
 
         return redirect('/users')->with('success', 'User baru telah ditambahkan!');
@@ -78,7 +78,7 @@ class UserController extends Controller
         //
         $userRole = $user->getRoleNames()->first();
         $roles = Role::all()->sortBy('name');
-        return view('users.edit', ['title' => 'Edit User', 'user' => $user, 'userRole' => $userRole, 'roles' => $roles]);
+        return view('users.edit', ['title' => 'Edit User', 'user' => $user, 'userRole' => $userRole, 'roles' => $roles, 'divisis' => Divisi::all()]);
     }
 
     /**
@@ -86,10 +86,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // branch if melakukan cek apakah form yang disubmit adalah form untuk mengupdate data user atau mengubah password user
         if ($request->formName == "update-form") {
             $rules = [
                 'name' => 'required',
+                'divisi_id' => 'nullable',
                 'role' => 'required',
             ];
 
@@ -99,6 +100,9 @@ class UserController extends Controller
             }
 
             $validatedData = $request->validate($rules);
+            if (isset($validatedData['divisi_id']) == false) {
+                $validatedData['divisi_id'] = null;
+            }
 
             // blok kode ini dieksekusi jika user admin mengubah role user lain
             if ($request->role != $user->getRoleNames()->first()) {

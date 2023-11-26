@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
                         <h3>{{ __($title) }}</h3>
-                        <p class="text-subtitle text-muted">{{ __('You are logged in as admin!') }}</p>
+                        <p class="text-subtitle text-muted">{{ __('Anda login sebagai pengelola!') }}</p>
                     </div>
                 </div>
             </div>
@@ -15,10 +15,10 @@
 
         {{-- page content --}}
         <div class="page-content">
-            <a href="{{ url('users') }}" class="btn btn-primary mb-3">
-                <i class="fas fa-chevron-left"></i> Kembali
-            </a>
-            <section class="row">
+            <section>
+                <a href="{{ url('users') }}" class="btn btn-primary mb-3">
+                    <i class="fas fa-chevron-left"></i> Kembali
+                </a>
                 <div class="card col-6">
                     <div class="card-header">
                         <h4 class="card-title">{{ __('Tambah User') }}</h4>
@@ -65,6 +65,29 @@
                                                 @endforeach
                                             </select>
                                             @error('role')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+                                        <label for="role" class="form-label">Divisi</label>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text" for="role">
+                                                <span class="">
+                                                    <i class="bi bi-person-badge-fill"></i>
+                                                </span>
+                                            </label>
+                                            <select class="form-select" id="divisi_id" name="divisi_id">
+                                                @foreach ($divisis as $divisi)
+                                                    @if (old('divisi_id') == $divisi->id)
+                                                        <option value="{{ $divisi->id }}" selected>{{ ucwords($divisi->nama) }}</option>
+                                                    @else
+                                                        <option value="{{ $divisi->id }}">{{ ucwords($divisi->nama) }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            @error('divisi_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>

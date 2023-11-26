@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SuratMasuk;
+use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
 
 class HomeController extends Controller
 {
@@ -43,27 +45,44 @@ class HomeController extends Controller
 
     public function indexAdmin()
     {
-        $count = SuratMasuk::all()->count();
-        return view('admin.dashboard', ['title' => 'Dashboard', 'count' => $count]);
+        $sumSuratMasuk = SuratMasuk::all()->count();
+        $sumSuratKeluar = SuratKeluar::all()->count();
+        return view('dashboard.admin', ['title' => 'Dashboard', 'sumSuratMasuk' => $sumSuratMasuk, 'sumSuratKeluar' => $sumSuratKeluar]);
     }
 
     public function indexPengolah()
     {
-        return view('pengolah.dashboard', ['title' => 'Dashboard']);
+        $sumSuratMasuk = SuratMasuk::all()->count();
+        $sumSuratKeluar = SuratKeluar::all()->count();
+        return view('dashboard.pengolah', ['title' => 'Dashboard', 'sumSuratMasuk' => $sumSuratMasuk, 'sumSuratKeluar' => $sumSuratKeluar]);
     }
 
     public function indexPimpinan()
     {
-        return view('pimpinan.dashboard', ['title' => 'Dashboard']);
+        $sumSuratMasuk = SuratMasuk::all()->count();
+        $sumSuratMasukPending = SuratMasuk::doesntHave('DisposisiPertama')->count();
+        return view('dashboard.pimpinan', ['title' => 'Dashboard', 'sumSuratMasuk' => $sumSuratMasuk, 'sumSuratMasukPending' => $sumSuratMasukPending]);
     }
 
     public function indexKabag()
     {
-        return view('kabag.dashboard', ['title' => 'Dashboard']);
+        $sumSuratMasuk = SuratMasuk::whereHas('DisposisiPertama', function (QueryBuilder $query) {$query->where('divisi_id', Auth::user()->divisi_id);})->count();
+        $sumSuratMasukPending = SuratMasuk::
+        whereHas('DisposisiPertama', function (QueryBuilder $query)
+        {
+            $query->where('divisi_id', Auth::user()->divisi_id);
+        })->doesntHave('DisposisiKedua')->count();
+        return view('dashboard.kabag', ['title' => 'Dashboard', 'sumSuratMasuk' => $sumSuratMasuk, 'sumSuratMasukPending' => $sumSuratMasukPending]);
     }
 
     public function indexStaff()
     {
-        return view('staff.dashboard', ['title' => 'Dashboard']);
+        $sumSuratMasuk = SuratMasuk::whereHas('DisposisiKedua', function (QueryBuilder $query) {$query->where('user_id', Auth::user()->id);})->count();
+        $sumSuratMasukPending = SuratMasuk::
+        whereHas('DisposisiKedua', function (QueryBuilder $query)
+        {
+            $query->where('user_id', Auth::user()->id);
+        })->where('status', 'Menunggu konfirmasi staff')->count();
+        return view('dashboard.staff', ['title' => 'Dashboard', 'sumSuratMasuk' => $sumSuratMasuk, 'sumSuratMasukPending' => $sumSuratMasukPending]);
     }
 }

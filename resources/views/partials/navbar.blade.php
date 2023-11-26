@@ -2,9 +2,10 @@
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-center align-items-center">
-                <div class="logo col-5 d-flex justify-content-start">
+                <div class="row logo d-flex text-center">
                     {{-- <a href="/home"><img src="{{ asset('mazer/compiled/svg/logo.svg') }}" alt="Logo" srcset="" /></a> --}}
-                    <a href="/home"><img src="{{ asset('img/jamkrindo_svg.svg') }}" alt="Logo" srcset="" style="scale: 300%;"/></a>
+                    <a href="/home"><img src="{{ asset('img/jamkrindo-logo.svg') }}" alt="Logo" srcset="" style="scale: 300%;"/></a>
+                    <p class="fs-6">Jamkrindo</p>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20"

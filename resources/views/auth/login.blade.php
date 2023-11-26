@@ -1,7 +1,57 @@
 @extends('auth.main')
 
 @section('content')
-<div class="container">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Log In</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="icon d-flex align-items-center justify-content-center mb-5">
+                            <span class="bi bi-person" style="font-size: 150%"></span>
+                        </div>
+                        <form method="POST" action="{{ route('login') }}" class="login-form">
+                            @csrf
+
+                            <div class="form-group">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" value="{{ old('email') }}"
+                                    required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group d-flex">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required autocomplete="current-password" value="{{ old('password') }}">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <button type="submit" class="btn btn-primary rounded submit p-3 px-5">Login</button> --}}
+                                <div class="d-grid gap-10">
+                                    <button type="submit" class="btn btn-primary p-3 px-5">
+                                        {{ __('Log in') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- <div class="container">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -79,5 +129,5 @@
 
     </div>
 
-</div>
+</div> --}}
 @endsection

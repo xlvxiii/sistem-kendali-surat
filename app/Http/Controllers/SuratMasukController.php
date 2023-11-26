@@ -43,7 +43,7 @@ class SuratMasukController extends Controller
             'tanggal_surat' => 'required|date',
             'tanggal_diterima' => 'required|date',
             'file' => 'required|file',
-            'jenis_disposisi_id' => 'required',
+            // 'jenis_disposisi_id' => 'required',
             'catatan' => 'nullable',
         ]);
 
@@ -62,6 +62,7 @@ class SuratMasukController extends Controller
     public function show(SuratMasuk $suratMasuk)
     {
         //
+        return view('surat-masuk.show', ['title' => 'Detail Surat', 'suratMasuk' => $suratMasuk]);
     }
 
     /**
@@ -88,7 +89,7 @@ class SuratMasukController extends Controller
             'tanggal_surat' => 'required|date',
             'tanggal_diterima' => 'required|date',
             'file' => 'file',
-            'jenis_disposisi_id' => 'required',
+            // 'jenis_disposisi_id' => 'required',
             'catatan' => 'nullable',
         ]);
 

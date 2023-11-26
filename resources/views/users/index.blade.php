@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
                         <h3>{{ __($title) }}</h3>
-                        <p class="text-subtitle text-muted">{{ __('You are logged in as admin!') }}</p>
+                        <p class="text-subtitle text-muted">{{ __('Anda login sebagai pengelola!') }}</p>
                     </div>
                 </div>
             </div>
@@ -51,8 +51,8 @@
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th>Divisi</th>
                                     <th>Aksi</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,6 +62,13 @@
                                         <td>{{ ucwords($user->name) }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ ucwords($user->roles->pluck('name')->implode(',')) }}</td>
+                                        <td>
+                                            @if ($user->divisi_id != null)
+                                                {{ ucwords($user->Divisi->nama) }}
+                                            @else
+                                                {{ '-' }}
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="/users/{{ $user->id }}/edit" class="btn btn-sm btn-warning text-white mx-1" title="Edit">
                                                 <span class="bi bi-pencil-fill"></span>

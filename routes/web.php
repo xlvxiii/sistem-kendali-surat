@@ -1,10 +1,17 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\{Route, Auth};
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
+use App\Http\Controllers\SuratMasukPengelolaController;
+use App\Http\Controllers\SuratKeluarPengelolaController;
+use App\Http\Controllers\SuratKeluarPimpinanController;
+use App\Http\Controllers\SuratMasukKabagController;
+use App\Http\Controllers\SuratMasukPimpinanController;
+use App\Http\Controllers\SuratMasukStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +25,7 @@ use App\Http\Controllers\SuratKeluarController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Auth::routes();
@@ -32,6 +39,20 @@ Route::get('/kabag', [HomeController::class, 'indexKabag'])->middleware('role:ke
 Route::get('/staff', [HomeController::class, 'indexStaff'])->middleware('role:staff')->name('staff.dashboard');
 
 
-Route::resource('/users', UserController::class)->middleware(['auth', 'role:admin']);
-Route::resource('/suratMasuk', SuratMasukController::class)->middleware('auth');
-Route::resource('/suratKeluar', SuratKeluarController::class)->middleware('auth');
+Route::resource('/users', UserController::class)->middleware(['auth', 'role:admin|unit pengolah']);
+Route::resource('/account', AccountController::class)->only(['edit', 'update'])->middleware(['auth'])->parameters(['account' => 'user']);
+
+Route::resource('/suratMasuk', SuratMasukController::class)->middleware(['auth', 'role:admin']);
+Route::get('/suratMasukPengelola/export', [SuratMasukPengelolaController::class, 'export'])->middleware(['auth', 'role:unit pengolah']);
+Route::resource('/suratMasukPengelola', SuratMasukPengelolaController::class)->middleware(['auth', 'role:unit pengolah'])->parameters(['suratMasukPengelola' => 'suratMasuk']);
+Route::get('/suratMasukPimpinan/pending', [SuratMasukPimpinanController::class, 'pending'])->name('pending')->middleware(['auth', 'role:pimpinan']);
+Route::get('/suratMasukPimpinan/pending/{suratMasuk}', [SuratMasukPimpinanController::class, 'showPending'])->middleware(['auth', 'role:pimpinan']);
+Route::put('/suratMasukPimpinan/pending/{suratMasuk}', [SuratMasukPimpinanController::class, 'update'])->name('updatePending')->middleware(['auth', 'role:pimpinan']);
+Route::resource('/suratMasukPimpinan', SuratMasukPimpinanController::class)->only('index', 'show', 'update')->middleware(['auth', 'role:pimpinan'])->parameters(['suratMasukPimpinan' => 'suratMasuk']);
+Route::resource('/suratMasukKabag', SuratMasukKabagController::class)->only('index', 'show', 'update')->middleware(['auth', 'role:kepala bagian'])->parameters(['suratMasukKabag' => 'suratMasuk']);
+Route::resource('/suratMasukStaff', SuratMasukStaffController::class)->only('index', 'show', 'update')->middleware(['auth', 'role:staff'])->parameters(['suratMasukStaff' => 'suratMasuk']);
+
+Route::resource('/suratKeluar', SuratKeluarController::class)->middleware(['auth', 'role:admin']);
+Route::get('/suratKeluarPengelola/export', [SuratKeluarPengelolaController::class, 'export'])->middleware(['auth', 'role:unit pengolah']);
+Route::resource('/suratKeluarPengelola', SuratKeluarPengelolaController::class)->middleware(['auth', 'role:unit pengolah'])->parameters(['suratKeluarPengelola' => 'suratKeluar']);
+Route::resource('/suratKeluarPimpinan', SuratKeluarPimpinanController::class)->only('index', 'show')->middleware(['auth', 'role:pimpinan'])->parameters(['suratKeluarPimpinan' => 'suratKeluar']);

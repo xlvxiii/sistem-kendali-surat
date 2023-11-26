@@ -20,12 +20,8 @@ return new class extends Migration
             $table->string('asal_surat');
             $table->string('nomor_agenda')->nullable();
             $table->string('file');
-            $table->foreignId('jenis_disposisi_id')->nullable();
-            $table->string('kabag_tujuan')->nullable();
-            $table->string('staff_tujuan')->nullable();
-            $table->timestamp('tgl_diposisi_pimpinan')->nullable();
-            $table->timestamp('tgl_diposisi_kabag')->nullable();
             $table->text('catatan')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

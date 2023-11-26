@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,6 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'divisi_id',
         'email',
         'password',
     ];
@@ -43,4 +46,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function Divisi(): BelongsTo
+    {
+        return $this->belongsTo(Divisi::class);
+    }
+
+    public function DisposisiKedua(): HasMany
+    {
+        return $this->hasMany(DisposisiKedua::class);
+    }
 }

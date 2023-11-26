@@ -15,39 +15,82 @@ class UserSeeder extends Seeder
     {
         //buat user
         $newAdmin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin',
+            'name' => 'Gilbert Kertzmann',
+            'email' => 'admin@example.com',
             'password' => bcrypt('admin')
         ]);
 
+        $newAdmin->assignRole('admin');
+
         $newUnitPengolah = User::create([
-            'name' => 'Aya',
-            'email' => 'aya@gmail.com',
-            'password' => bcrypt('password')
+            'name' => 'Harvey Nienow',
+            'email' => 'pengelola@example.com',
+            'password' => bcrypt('Password1'),
+            'divisi_id' => 1
         ]);
+
+        $newUnitPengolah->assignRole('unit pengolah');
 
         $newPimpinan = User::create([
-            'name' => 'Juino',
-            'email' => 'juino@gmail.com',
-            'password' => bcrypt('password')
+            'name' => 'Ellis Hirthe',
+            'email' => 'pimpinan@example.com',
+            'password' => bcrypt('Password1')
         ]);
+
+        $newPimpinan->assignRole('pimpinan');
 
         $newKabag = User::create([
-            'name' => 'Yuli',
-            'email' => 'yuli@gmail.com',
-            'password' => bcrypt('password')
+            'name' => 'Jackie Aufderhar',
+            'email' => 'kabagopr@example.com',
+            'password' => bcrypt('Password1'),
+            'divisi_id' => 2,
         ]);
+
+        $newKabag->assignRole('kepala bagian');
+
+        $newKabag = User::create([
+            'name' => 'Eduardo Hintz',
+            'email' => 'kabagks@example.com',
+            'password' => bcrypt('Password1'),
+            'divisi_id' => 3,
+        ]);
+
+        $newKabag->assignRole('kepala bagian');
+
+        $newKabag = User::create([
+            'name' => 'Alvin Parisian',
+            'email' => 'kabagbs@example.com',
+            'password' => bcrypt('Password1'),
+            'divisi_id' => 1,
+        ]);
+
+        $newKabag->assignRole('kepala bagian');
 
         $newStaff = User::create([
-            'name' => 'Hafidz',
-            'email' => 'hafidz@gmail.com',
-            'password' => bcrypt('password')
+            'name' => 'Tracy Gorczany',
+            'email' => 'staffopr@example.com',
+            'password' => bcrypt('Password1'),
+            'divisi_id' => 2,
         ]);
 
-        $newAdmin->assignRole('admin');
-        $newUnitPengolah->assignRole('unit pengolah');
-        $newPimpinan->assignRole('pimpinan');
-        $newKabag->assignRole('kepala bagian');
+        $newStaff->assignRole('staff');
+
+        $newStaff = User::create([
+            'name' => 'Sylvester Gleichner',
+            'email' => 'staffks@example.com',
+            'password' => bcrypt('Password1'),
+            'divisi_id' => 3,
+        ]);
+
+        $newStaff->assignRole('staff');
+
+        $newStaff = User::create([
+            'name' => 'Victor Osinski',
+            'email' => 'staffbs@example.com',
+            'password' => bcrypt('Password1'),
+            'divisi_id' => 1,
+        ]);
+
         $newStaff->assignRole('staff');
     }
 }

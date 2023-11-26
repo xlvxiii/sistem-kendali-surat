@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
                         <h3>{{ __($title) }}</h3>
-                        <p class="text-subtitle text-muted">{{ __('You are logged in as admin!') }}</p>
+                        <p class="text-subtitle text-muted">{{ __('Anda login sebagai pengelola!') }}</p>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                                                             <i class="bi bi-person-badge-fill"></i>
                                                         </span>
                                                     </label>
-                                                    <select class="form-select" id="role" name="role">
+                                                    <select class="form-select" id="role" name="role" onchange="toggle_divisi()">
                                                         @foreach ($roles as $role)
                                                             @if (old('role', $userRole) == $role->name)
                                                                 <option value="{{ $role->name }}" selected>{{ ucwords($role->name) }}</option>
@@ -76,6 +76,38 @@
                                                         </div>
                                                     @enderror
                                                 </div>
+
+                                                {{-- input divisi --}}
+                                                <label for="role" class="form-label">Divisi</label>
+                                                <div class="input-group mb-3">
+                                                    <label class="input-group-text" for="role">
+                                                        <span class="">
+                                                            <i class="bi bi-person-badge-fill"></i>
+                                                        </span>
+                                                    </label>
+                                                    <select class="form-select" id="divisi_id" name="divisi_id">
+                                                        <option value="0" selected>Pilih Divisi</option>
+                                                        @foreach ($divisis as $divisi)
+                                                            @if (old('divisi_id', $user->divisi_id) == $divisi->id)
+                                                                <option value="{{ $divisi->id }}" selected>{{ ucwords($divisi->nama) }}</option>
+                                                            @else
+                                                                <option value="{{ $divisi->id }}">{{ ucwords($divisi->nama) }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                    @error('divisi_id')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <script>
+                                                    var role = document.getElementById("role");
+                                                    var selectedRole = role.options[role.selectedIndex].text;
+                                                    if (selectedRole == "Pimpinan") {
+                                                        document.getElementById('divisi_id').disabled = true;
+                                                    }
+                                                </script>
 
                                                 {{-- input email --}}
                                                 <div class="col-12">
@@ -99,6 +131,7 @@
                                         </div>
 
                                         <button id="update-button" type="button" class="btn btn-primary">Simpan</button>
+                                        <button type="reset" class="btn btn-light-secondary">Reset</button>
                                     </form>
                                 </div>
                             </div>
@@ -125,7 +158,8 @@
                                                     <div class="form-group has-icon-left">
                                                         <label for="password">Password</label>
                                                         <div class="position-relative">
-                                                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" onkeyup="toggle_password_confirmation()">
+                                                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password"
+                                                                onkeyup="toggle_password_confirmation()">
                                                             @error('password')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
@@ -179,6 +213,15 @@
                 document.getElementById('password_confirmation').disabled = true;
             } else {
                 document.getElementById('password_confirmation').disabled = false;
+            }
+        }
+
+        function toggle_divisi() {
+            if ($("#role :selected").text() != "Pimpinan") {
+                document.getElementById('divisi_id').disabled = false;
+            } else {
+                document.getElementById('divisi_id').disabled = true;
+                document.getElementById('divisi_id').value = 0;
             }
         }
 
